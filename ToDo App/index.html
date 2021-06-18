@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moiz To-Do App</title>
+</head>
+<style>
+    .main{
+    text-align: center;
+    }
+    .div1{
+        
+        border: gray 2px solid;
+        margin: 0 auto;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        width: 50%;
+    }
+    .list{
+        border:1px gray solid;
+        list-style: none;
+        width: 80%;
+        margin: 0 auto;
+
+    }
+    .deleteButton{
+        margin: 5px;
+    }
+    .editButton{
+        margin: 5px;
+    }
+
+</style>
+<body>
+    <div class="main" id="main">
+        <input id="inputField" type="text" placeholder="Write what to do?">
+        <button onclick="addtodo()">ADD</button>
+        <button onclick="deleteAll()">Delete All</button>
+    </div>
+    <br>
+    <div class="div1">
+        <h1>Todo</h1>
+        <div class="div2">
+        <ul id="ol">
+
+        </ol>
+        </div>
+    </div>
+
+    <script>
+        function addtodo(){
+            
+            // get value from input
+            
+            var input = document.getElementById("inputField")
+            if(inputField.value === ""){
+                alert("Write something")
+                return;
+            }
+
+            // Create list
+
+            li = document.createElement("li");
+            li.setAttribute("class","list")
+            liText = document.createTextNode(input.value);
+            li.appendChild(liText);
+
+            // Create Delete Button
+           
+            Deletebtn = document.createElement("button");
+            btnText = document.createTextNode("Delete");
+            Deletebtn.appendChild(btnText);
+            li.appendChild(Deletebtn);
+            Deletebtn.setAttribute("onclick","deleteButton(this)")
+            Deletebtn.setAttribute("class","deleteButton")
+            
+
+            // Create Edit Button
+
+            var edit_btn = document.createElement("button");
+            var edit_text = document.createTextNode("Edit");
+            edit_btn.appendChild(edit_text)
+            li.appendChild(edit_btn)
+           edit_btn.setAttribute("onclick","editButton(this)");
+           edit_btn.setAttribute("class","editButton");
+
+
+            var ol = document.getElementById("ol");
+            ol.appendChild(li);
+            input.value=""
+            }
+
+
+            function deleteButton(e){
+            e.parentNode.remove()
+            }
+
+            function deleteAll(){
+               document.getElementById("ol")
+               ol.innerHTML = ""
+            }
+
+            function editButton(e){
+                val = e.parentNode.firstChild.nodeValue;
+                edit_val = prompt("Enter Edit Value",val);
+                e.parentNode.firstChild.nodeValue = edit_val
+            }
+    </script>
+</body>
+</html>

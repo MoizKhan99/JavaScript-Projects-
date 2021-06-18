@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.js"></script>
+<link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.css" />
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  var firebaseConfig = {
+    apiKey: "AIzaSyDkpU2HP2BCU6XNfcy4i5LrMnx4racBoao",
+    authDomain: "e-commereceauth.firebaseapp.com",
+    projectId: "e-commereceauth",
+    storageBucket: "e-commereceauth.appspot.com",
+    messagingSenderId: "920799583441",
+    appId: "1:920799583441:web:dd4e4a5f5a7bf886b639f0",
+    measurementId: "G-6TSC1WYET2"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+    <style>
+ body{
+     background-image: url(1.jpg);
+ }
+ .heading1{
+     text-align: center;
+     color: aqua;
+     font-size: 36px;
+ }
+ .main{
+     text-align: center;
+     color: aqua;
+ }
+ .login{
+     text-align: center;
+     color: aqua;
+     font-size: 30px;
+     text-decoration: none;
+ }
+    </style>
+</head>
+<body>
+        <h1 class="heading1">The Moiz Store</h1>
+    <div class="main">
+    <h1 class="login">Login</h1>
+    <form>
+        <label>Email</label><br><br>
+         <input type="text" id="email" name="Email" size="15" maxlength="30" required="required"/><br><br>
+        <label>Password</label><br><br>
+        <input id="password" type="password" name="password" size="15" maxlength="30" required="required"/><br><br>
+        <button onclick="onLogin()"><img src="1.png" height="20px" width="50px"></button>
+        </form>
+        <h1><a class="login" href="../sign in/sign in.html">Create Account</a></h1>
+</div>
+
+
+<script>
+    const onLogin = () =>{
+
+    let email = document.getElementById("email");
+    let password = document.getElementById("password");
+    
+    firebase.auth().createUserWithEmailAndPassword(email.value, password.value)
+  .then((userCredential) => {
+    // Signed in 
+    var user = userCredential.user;
+    console.log(userCredential);
+    // ...
+  })
+  .catch((error) => {
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    console.log(error)
+    // ..
+  });
+    }
+
+
+</script>
+</body>
+</html>

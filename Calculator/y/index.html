@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-image: url(1.jpg);
+        }
+.main{
+    background-color: gray;
+    border: 2px solid gray;
+    width: 500px;
+    height: 320px;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+.result{
+    width: 98%;
+    background-color: black;
+    color: white;
+    margin: 1px;
+    height: 50px;
+    font-size: 36px;
+
+}
+.btn{
+    background-color:rgb(255, 246, 246);
+    color: black;
+    width: 23.9%;
+    height: 50px;
+    margin-top: 2px;
+    margin-left: 2px;
+    font-size: 30px;
+}
+.half-Btn{
+    background-color: rgb(136, 218, 15);
+    width: 49%;
+    margin-top: 2px;
+    margin-left: 2.1px;
+    height: 50px;
+    font-size: 30px;
+    color: white;
+}
+
+    </style>
+</head>
+<body>
+  <div class="main">
+      <div>
+          <input id="result" class="result" type="text">
+      </div>
+      <div>
+        <button class="btn" onclick="getNumber('(')">(</button>
+        <button class="btn" onclick="getNumber(')')">)</button>
+        <button class="btn" onclick="deleteNum()">Del</button>
+        <button id="result" onclick="clearAll()" class="btn">C</button>
+    </div>
+      <div>
+          <button class="btn" onclick="getNumber('7')">7</button>
+          <button class="btn" onclick="getNumber('8')">8</button>
+          <button class="btn" onclick="getNumber('9')">9</button>
+          <button class="btn" onclick="getNumber('*')">X</button>
+      </div>
+      <div>
+          <button class="btn" onclick="getNumber('4')">4</button>
+          <button class="btn" onclick="getNumber('5')">5</button>
+          <button class="btn" onclick="getNumber('6')">6</button>
+          <button class="btn" onclick="getNumber('-')">-</button>
+      </div>
+      <div>
+          <button class="btn" onclick="getNumber('1')">1</button>
+          <button class="btn" onclick="getNumber('2')">2</button>
+          <button class="btn" onclick="getNumber('3')">3</button>
+          <button class="btn" onclick="getNumber('+')">+</button>
+      </div>
+      <div>
+          
+          <button class="btn" onclick="getNumber('0')">0</button>
+          <button class="btn" onclick="getResult()">=</button>
+          <button class="btn" onclick="getNumber('.')">.</button>
+          <button class="btn" onclick="getNumber('/')">/</button>
+      </div>
+      
+
+  </div>
+
+  <script>
+      function getNumber(num){
+          var result = document.getElementById("result");
+          result.value += num;
+      }
+      function clearAll(){
+        var result = document.getElementById("result");
+        result.value= ""
+      }
+      function getResult(){
+        var result = document.getElementById("result");
+        if(result.value == ""){
+            return;
+        }
+        result.value = eval(result.value)
+      }
+      function deleteNum(){
+        var result = document.getElementById("result");
+        result.value = result.value.slice(0,-1)
+      }
+  </script>
+
+
+</body>
+</html>

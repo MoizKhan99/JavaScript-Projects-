@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <input onkeyup="addwithkey()" type="text" placeholder="Enter value" id="val">
+        <button onclick="add()">ADD</button>
+        <button onclick="deleteAll()">DELETE ALL</button>
+    </div> 
+    <ul id="list">
+
+    </ul>
+
+    <script>
+        function add() {
+    var val = document.getElementById("val");
+    if (!/([^\s])/.test(val.value)) {
+        alert("Please enter value")
+    } else {
+        var list = document.getElementById("list");
+        var li = document.createElement("LI");
+        var input = document.createElement("input");
+        input.setAttribute("value",val.value)
+        input.setAttribute("disabled",true)
+        input.onkeyup = function(){
+            if(event.keyCode === 13){
+                event.target.disabled = true;
+            }
+        }
+        li.appendChild(input)
+        var delete_btn = document.createElement("button");
+        var delete_text = document.createTextNode("Delete");
+        delete_btn.setAttribute("class", "delete")
+        delete_btn.appendChild(delete_text)
+        delete_btn.onclick = function (e) {
+            var parent_li = e.target.parentNode;
+            parent_li.remove()
+        }
+        li.appendChild(delete_btn)
+        var edit_btn = document.createElement("button");
+        var edit_text = document.createTextNode("Edit");
+        edit_btn.appendChild(edit_text)
+        edit_btn.onclick = function (e) {
+            var parent_node = e.target.parentNode;
+            parent_node.firstChild.disabled = false;
+        }
+        li.appendChild(edit_btn)
+        list.appendChild(li)
+        console.log(li)
+        val.value = ""
+    }
+}
+
+function addwithkey() {
+    if (event.keyCode === 13) {
+        add()
+    }
+}
+
+function deleteAll() {
+    var list = document.getElementById("list");
+    list.innerHTML = ""
+}
+    </script>
+</body>
+</html>
