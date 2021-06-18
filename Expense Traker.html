@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <label>
+        Income
+    </label> <br />
+    <input type="text" id="income">
+    <button onclick="addIncome()">Add Income</button>
+    <h4 id="saving"></h4>
+    <div>
+        <label>
+            Category
+        </label> <br />
+        <select id="category">
+            <option value="food">Food</option>
+            <option value="bike">Bike</option>
+            <option value="rent">Rent</option>
+        </select> <br />
+
+        <label>
+            Expense
+        </label> <br />
+        <input type="text" id="expense">
+        <br />
+        <button onclick="addExpense()">Add Expense</button>
+
+    </div>
+    <div>
+        <label>Filter</label>
+        <select id="filter" onchange="showFilterExpenses()">
+            <option value="all">All</option>
+            <option value="food">Food</option>
+            <option value="bike">Bike</option>
+            <option value="rent">Rent</option>
+        </select>
+        <h4>Transaction</h4>
+        <ul id="expenses"></ul>
+    </div>
+    <script>
+        var saving = 0;
+        var expenses = []
+        function addIncome() {
+            var income = document.getElementById("income");
+            saving += parseFloat(income.value)
+            updateSaving()
+        }
+        function updateSaving() {
+            var savingElement = document.getElementById("saving");
+            savingElement.innerText = "Saving " + saving
+        }
+        function addExpense() {
+            var category = document.getElementById("category");
+            var expense = document.getElementById("expense");
+
+            var newExpense = new Expense(parseFloat(expense.value), category.value)
+            expenses.push(newExpense)
+            saving -= parseFloat(expense.value)
+            updateSaving()
+            displayExpenses()
+        }
+
+        function displayExpenses() {
+            var expensesList = document.getElementById("expenses");
+            expensesList.innerHTML = ""
+            for (var i = 0; i < expenses.length; i++) {
+                var li = document.createElement("li");
+                var text = document.createTextNode(expenses[i].expense + " - " + expenses[i].category)
+                li.appendChild(text)
+                expensesList.appendChild(li)
+            }
+
+        }
+
+        function showFilterExpenses() {
+            var filter = document.getElementById("filter").value
+            var expensesList = document.getElementById("expenses");
+            expensesList.innerHTML = ""
+            if(filter === "all") {
+                displayExpenses();
+                return
+            }
+            for (var i = 0; i < expenses.length; i++) {
+                if (filter === expenses[i].category) {
+                    var li = document.createElement("li");
+                    var text = document.createTextNode(expenses[i].expense + " - " + expenses[i].category)
+                    li.appendChild(text)
+                    expensesList.appendChild(li)
+                }
+
+            }
+        }
+        function Expense(expense, category) {
+            this.expense = expense;
+            this.category = category;
+        }
+    </script>
+</body>
+
+</html>
